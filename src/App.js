@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { auth } from './firebaseConfig';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -19,13 +19,11 @@ const App = () => {
 
   return (
     <Router>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/login">
-          {user ? <Redirect to="/" /> : <Login />}
-        </Route>
-        <Route path="/register" component={Register} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
     </Router>
   );
 };
