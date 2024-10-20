@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { auth, provider } from '../firebaseConfig';
 import { signInWithPopup } from 'firebase/auth';
+import './style.css';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');

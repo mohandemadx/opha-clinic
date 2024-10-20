@@ -1,0 +1,579 @@
+/*
+
+[Table of content]
+
+1. General Styling
+2. Header
+3. Parallax
+4. Services Section
+5. Contact Section
+
+*/
+
+/* *********************************************************
+  General Styling
+********************************************************* */
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0px;
+}
+
+.wrap {
+  width: 100%;
+  padding: 3.5em 0;
+}
+
+a {
+  color:#291ea6;
+}
+
+a:hover {
+  color: #291ea6;
+}
+
+a, img, .overlay, input, textarea, .plan-wrap p, .filters .filter {
+/*transition*/
+  -webkit-transition: all .12s linear;
+     -moz-transition: all .12s linear;
+       -o-transition: all .12s linear;
+          transition: all .12s linear;
+}
+
+body {
+  font-size: 1em;
+  line-height: 1.7em;
+  color: #777777;
+  font-weight: normal;
+}
+
+body, input, textarea {
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6, .navigation a, .btn, .filters .filter {
+  font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  position: relative;
+  margin: 1em 0 1.4em;
+  color: #484f58;
+}
+
+h1,h2 {
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 5em;
+  line-height: 1.2em;
+  color: white;
+}
+
+h2 {
+  font-size: 2.8em;
+  line-height: .9em;
+}
+
+h3 {
+  font-size: 1.8em;
+  line-height: .9em;
+}
+
+h4,h5,h6 {
+  font-size: 1.125em;
+  line-height: .5em;
+}
+
+
+blockquote {
+  line-height: 1.2em;
+  display: inline-block;
+  margin: 0.3em 0;
+  padding: 2px 20px 0 20px;
+  border-left: 3px solid #e8e8e8;
+}
+
+blockquote p {
+  margin-bottom: 0 !important;
+}
+
+.pleft-25 {
+  padding-left: 0;
+}
+
+.pright-25 {
+  padding-right: 0;
+}
+
+.curveUpColor, .curveDownColor {
+  fill: #fff;
+  stroke: #fff;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+}
+
+.curveUpColor {
+  margin-top: -100px;
+}
+
+.curveDownColor {
+  margin-bottom: -100px;
+}
+
+.curveMapUp {
+  margin-top: 52px;
+}
+
+.curveMapDown {
+  margin-top: -238px;
+}
+
+.register h2 {
+  font-size: 3.5em;
+  text-align: center;
+  line-height: .5em;
+}
+
+.register h7 {
+  font-weight: bold;
+  margin-left: 50px;
+}
+
+.register input, .register select{
+  margin-left: 70px;
+}
+
+.register img{
+  position: relative;
+  top: 200px;
+  left: 850px;
+}
+/* *********************************************************
+  Buttons
+********************************************************* */
+
+.btn {
+  position: relative;
+  display: inline-block;
+  margin: .8em 0;
+  padding: .5em 1.6em;
+  color: #fff;
+  font-size: .8em;
+/*border-radius*/
+  -webkit-border-radius: 30px;
+     -moz-border-radius: 30px;
+          border-radius: 30px;
+  background:#291ea6;
+}
+
+.register .btn {
+  position: relative;
+  margin-left: 50px;
+  display: inline-block;
+  padding: .7em 1.8em;
+  color: #fff;
+  font-size: .8em;
+/*border-radius*/
+  -webkit-border-radius: 30px;
+     -moz-border-radius: 30px;
+          border-radius: 30px;
+  background:#291ea6;
+}
+
+.btn:hover, .btn:focus, .btn-current {
+  color: #fff;
+  background: #291ea6;
+}
+
+.btn:hover, .social-set a:hover, .team-social a i:hover, .header-carousel .owl-buttons .owl-prev:hover, .header-carousel .owl-buttons .owl-next:hover {
+  -webkit-animation: rubberBand .8s 1;
+     -moz-animation: rubberBand .8s 1;
+       -o-animation: rubberBand .8s 1;
+          animation: rubberBand .8s 1;
+}
+
+@-webkit-keyframes rubberBand {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    -webkit-transform: scale3d(1.15, 0.9, 1);
+    transform: scale3d(1.15, 0.9, 1);
+  }
+
+  40% {
+    -webkit-transform: scale3d(0.8, 1.15, 1);
+    transform: scale3d(0.8, 1.15, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    -webkit-transform: scale3d(.95, 1.05, 1);
+    transform: scale3d(.95, 1.05, 1);
+  }
+
+  75% {
+    -webkit-transform: scale3d(1.05, .95, 1);
+    transform: scale3d(1.05, .95, 1);
+  }
+
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes rubberBand {
+ 0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    -webkit-transform: scale3d(1.15, 0.9, 1);
+    transform: scale3d(1.15, 0.9, 1);
+  }
+
+  40% {
+    -webkit-transform: scale3d(0.8, 1.15, 1);
+    transform: scale3d(0.8, 1.15, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    -webkit-transform: scale3d(.95, 1.05, 1);
+    transform: scale3d(.95, 1.05, 1);
+  }
+
+  75% {
+    -webkit-transform: scale3d(1.05, .95, 1);
+    transform: scale3d(1.05, .95, 1);
+  }
+
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.rubberBand {
+  -webkit-animation-name: rubberBand;
+  animation-name: rubberBand;
+}
+
+.btn-big {
+  font-size: 1.4em;
+  padding: .65em 2.2em;
+}
+
+.btn-disabled, .btn-disabled:hover, .btn-disabled:focus {
+  cursor: default;
+  color: #bbb;
+  background: #e6e6e6;
+}
+
+.btn-ghost {
+  margin: 10px;
+  color: #fff;
+  border: 2px solid #fff;
+  background: transparent;
+}
+
+.btn-ghost:hover {
+  border-color: transparent;
+  background-color:#291ea6;
+}
+
+.btn-ghost-dark {
+  border-color: #291ea6;
+  color: #291ea6;
+}
+
+/* *********************************************************
+  Header
+********************************************************* */
+
+#top-header {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  padding: 7px 29px;
+}
+
+#top-header .grid {
+  overflow: visible;
+}
+
+.header-default {
+  background: white;
+}
+
+.header-home {
+  background: white;
+}
+
+.header-home .navigation a {
+  color: #545757;
+}
+
+.top-slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 1000px;
+}
+
+.slider {
+  height: 100%;
+}
+
+.top-slider .content-header {
+  position: absolute;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+}
+
+/* *********************************************************
+  Navigation
+********************************************************* */
+
+.navigation input[type=checkbox] {
+  position: sticky;
+  top: -9999px;
+  left: -9999px;
+}
+
+.navigation label {
+  display: none;
+  cursor: pointer;
+}
+
+.navigation {
+  position: sticky;
+  float: right;
+}
+
+.navigation ul li {
+  position: sticky;
+  display: inline;
+  float: left;
+}
+
+.navigation a {
+  font-size: 1em;
+  font-weight: bold;
+  display: block;
+  margin-left: 20px;
+  color: #fff;
+}
+
+.navigation .current a, .navigation ul li a:hover, .navigation ul li a:focus {
+  color:#291ea6;
+}
+
+.navigation .sub-menu {
+  position: sticky;
+  z-index: 9999;
+  top: 28px;
+  left: -27px;
+  visibility: hidden;
+  width: 210px;
+  padding: 20px;
+  opacity: 0;
+  border-top: 1px solid#291ea6;
+  background: #fff;
+}
+
+.navigation .sub-menu li {
+  position: sticky;
+}
+
+.sub-menu li a {
+  width: 170px;
+  margin: 0!important;
+  padding: .5em 1em;
+  border-bottom: none!important;
+/*border-radius*/
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+}
+
+.sub-menu li a:hover {
+  background: #f9f9f9;
+}
+
+.navigation li:hover > ul {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* *********************************************************
+  Parallax
+********************************************************* */
+
+.parallax-section {
+  z-index: -1;
+  clear: both;
+  background-image: url('D:/VsCode/node/opha-clinic/images/bg_1.jpg');
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+}
+
+.parallax2 {
+  background-image: url('D:/VsCode/node/opha-clinic/images/bg_1.jpg');
+}
+
+.parallax-section .content, .top-slider .content-header, .home-slider {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.parallax-section .content-header, .home-slider .content-header {
+  padding: 145px 0 250px;
+}
+
+.parallax2 .content {
+  padding: 100px 0;
+}
+
+.top-slider .content-header {
+  padding: 130px 0;
+}
+
+.parallax-section .content h2,
+.content-header h2,
+.parallax-section .content h3,
+.content-header h3 {
+  color: #fff;
+}
+
+.parallax-section h2 > span,
+.parallax-section h3 > span,
+.content-header h2 > span,
+.content-header h3 > span {
+  background: #fff;
+}
+
+.parallax-section .content h2, .content-header h2 {
+  font-size: 2.5em;
+}
+
+.parallax-section .content p, .top-slider .content-header p, .home-slider .content p {
+  width: 70%;
+  margin: 0 auto 30px auto;
+  color: #fff;
+}
+
+/* *********************************************************
+  Services Section
+********************************************************* */
+
+.services, .service-box {
+  text-align: center;
+}
+
+.service-icon {
+  margin-top: 20px;
+  padding-top: 1em;
+}
+
+.circle-icon {
+  display: inline-block;
+  font-size: 2em;
+  padding: 1.1em 1.15em;
+  color: #484f58;
+/*border-radius*/
+  -webkit-border-radius: 50%;
+     -moz-border-radius: 50%;
+          border-radius: 50%;
+  background: transparent;
+/*box-shadow*/
+  -webkit-box-shadow: 0 0 0 2px #484f58;
+     -moz-box-shadow: 0 0 0 2px #484f58;
+          box-shadow: 0 0 0 2px #484f58;
+/*transition*/
+  -webkit-transition: all .15s linear;
+     -moz-transition: all .15s linear;
+       -o-transition: all .15s linear;
+          transition: all .15s linear;
+}
+
+.service-box:hover .circle-icon {
+    /*box-shadow*/
+  -webkit-transform: scale(1.1);
+     -moz-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+       -o-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.service-entry {
+  margin-top: 70px;
+  padding: 0 .5em;
+}
+
+.service-entry p {
+  margin-bottom: 10px;
+}
+
+/* *********************************************************
+ Contact Section
+********************************************************* */
+
+.contact {
+  padding-top: 0;
+}
+
+.contact h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.contact .address h3 {
+  margin-top: 0;
+  margin-left: 25px;
+}
+
+address {
+  margin-top: 1em;
+}
+
+address div {
+  position: relative;
+  margin-top: 10px;
+}
+
+address i {
+  position: absolute;
+  top: 2px;
+  left: 0;
+}
+
+.address span {
+  line-height: 1.1;
+  margin-bottom: 3px;
+  color: #484f58;
+  font-size: 1.125em;
+  font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+}
+
