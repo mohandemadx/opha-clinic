@@ -35,7 +35,7 @@ const Register = () => {
     <form onSubmit={handleRegister}>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {success && <p style={{ color: 'green' }}>{success}</p>}
-      <div class='register'>
+      <div className='register'>
         <img src="/bg_2.jpg" width={800} height={800}/>
         <h2> Register </h2>
         <br/>
@@ -76,7 +76,7 @@ const Register = () => {
           <option value="doctor">Doctor</option>
         </select>
         <br/><br/>
-        <button class='btn' type="submit">Register</button>
+        <button className='btn' type="submit">Register</button>
       </div>
     </form>
   );
