@@ -36,9 +36,9 @@ const Register = () => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {success && <p style={{ color: 'green' }}>{success}</p>}
       <div class='register'>
+        <img src="/bg_2.jpg" width={800} height={800}/>
         <h2> Register </h2>
-        <img src="images/bg_2.jpg"></img>
-        <br></br>
+        <br/>
         <h7>National ID </h7><br></br>
         <input 
           type="text"
@@ -46,7 +46,7 @@ const Register = () => {
           value={userID}
           onChange={(e) => setID(e.target.value)}
           required
-        /><br></br>
+        /><br/>
         <h7>Full Name </h7><br></br>
         <input 
           type="text"
@@ -54,28 +54,28 @@ const Register = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-        /><br></br>
-        <h7>Email Address </h7><br></br>
+        /><br/>
+        <h7>Email Address </h7><br/>
         <input 
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-        /><br></br>
-        <h7>Phone Number</h7><br></br>
+        /><br/>
+        <h7>Phone Number</h7><br/>
         <input 
           type="text"
           placeholder="Phone"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-        /><br></br>
-        <h7>Role</h7><br></br>
+        /><br/>
+        <h7>Role</h7><br/>
         <select  onChange={(e) => setRole(e.target.value)} value={role}>
           <option value="patient">Patient</option>
           <option value="doctor">Doctor</option>
         </select>
-        <br></br><br></br>
+        <br/><br/>
         <button class='btn' type="submit">Register</button>
       </div>
     </form>

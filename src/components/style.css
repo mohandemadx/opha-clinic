@@ -147,9 +147,10 @@ blockquote p {
 }
 
 .register img{
-  position: relative;
-  top: 200px;
-  left: 850px;
+  position: fixed;
+  top: 0px;
+  left: 700px;
+  display: block;
 }
 /* *********************************************************
   Buttons
@@ -432,7 +433,7 @@ blockquote p {
 .parallax-section {
   z-index: -1;
   clear: both;
-  background-image: url('D:/VsCode/node/opha-clinic/images/bg_1.jpg');
+  background-image: url('D:/VsCode/node/opha-clinic/public/bg_1.jpg');
   background-repeat:no-repeat;
   background-attachment: fixed;
   background-position: center center;
@@ -440,7 +441,7 @@ blockquote p {
 }
 
 .parallax2 {
-  background-image: url('D:/VsCode/node/opha-clinic/images/bg_1.jpg');
+  background-image: url('D:/VsCode/node/opha-clinic/public/bg_1.jpg');
 }
 
 .parallax-section .content, .top-slider .content-header, .home-slider {
