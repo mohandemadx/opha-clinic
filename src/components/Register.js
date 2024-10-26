@@ -1,85 +1,160 @@
-// src/components/Register.js
+// Register.js
 import React, { useState } from 'react';
-import { addUser } from '../userServices';
-import './style.css';
+import { registerUser } from '../firebase/auth';
 
-const Register = () => {
+function Register() {
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
   const [role, setRole] = useState('patient'); // Default role
+  const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [userID, setID] = useState('');
-  const [error, setError] = useState(null); // To handle errors
-  const [success, setSuccess] = useState(null); // To display success messages
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
-    // Simulate a user ID from Firebase Auth (ideally, you would replace this with the actual user ID)
-    const userId = userID; // Replace with actual user ID from Firebase Auth
-
-    const profile = { name, phone };
+    setError(null); // Reset error state before attempting registration
+    setSuccessMessage(''); // Reset success message
 
     try {
-      await addUser(userId, email, role, profile);
-      setSuccess('User registered successfully!');
-      setError(null);
-      // Clear fields or redirect after registration
+      // Save user data to Firestore
+      await registerUser(email, password, role, name, phone);
+      
+      setSuccessMessage('Registration successful! You can now log in.'); // Set success message
+      setEmail(''); // Clear email field
+      setPassword(''); // Clear password field
+      setName(''); // Clear name field
+      setPhone(''); // Clear phone field
     } catch (err) {
-      setError('Error adding user: ' + err.message);
-      setSuccess(null);
+      setError(err.message); // Sets the error message if registration fails
+      console.error('Registration error:', err.message);
     }
   };
 
   return (
-    <form onSubmit={handleRegister}>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
-      <div className='register'>
-        <img src="/bg_2.jpg" width={800} height={800}/>
-        <h2> Register </h2>
-        <br/>
-        <h7>National ID </h7><br></br>
-        <input 
-          type="text"
-          placeholder="National ID"
-          value={userID}
-          onChange={(e) => setID(e.target.value)}
-          required
-        /><br/>
-        <h7>Full Name </h7><br></br>
-        <input 
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        /><br/>
-        <h7>Email Address </h7><br/>
-        <input 
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        /><br/>
-        <h7>Phone Number</h7><br/>
-        <input 
-          type="text"
-          placeholder="Phone"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        /><br/>
-        <h7>Role</h7><br/>
-        <select  onChange={(e) => setRole(e.target.value)} value={role}>
-          <option value="patient">Patient</option>
-          <option value="doctor">Doctor</option>
-        </select>
-        <br/><br/>
-        <button className='btn' type="submit">Register</button>
-      </div>
-    </form>
+    <div style={styles.container}>
+      <h2>Register</h2>
+      {error && <p style={styles.error}>{error}</p>} {/* Display error message if exists */}
+      {successMessage && <p style={styles.success}>{successMessage}</p>} {/* Display success message if exists */}
+      <form onSubmit={handleRegister} style={styles.form}>
+        <div style={styles.inputContainer}>
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            style={styles.input}
+          />
+        </div>
+        <div style={styles.inputContainer}>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            style={styles.input}
+          />
+        </div>
+        <div style={styles.inputContainer}>
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            style={styles.input}
+          />
+        </div>
+        <div style={styles.inputContainer}>
+          <label htmlFor="phone">Phone Number:</label>
+          <input
+            type="tel"
+            id="phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+            style={styles.input}
+          />
+        </div>
+        <div style={styles.inputContainer}>
+          <label>Role:</label>
+          <div>
+            <label>
+              <input
+                type="radio"
+                value="patient"
+                checked={role === 'patient'}
+                onChange={(e) => setRole(e.target.value)}
+                required
+              />
+              Patient
+            </label>
+            <div style={{ margin: '5px 0' }} /> {/* Small space between options */}
+            <label>
+              <input
+                type="radio"
+                value="doctor"
+                checked={role === 'doctor'}
+                onChange={(e) => setRole(e.target.value)}
+                required
+              />
+              Doctor
+            </label>
+          </div>
+        </div>
+        <button type="submit" style={styles.button}>Register</button>
+      </form>
+    </div>
   );
+}
+
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '20px',
+    maxWidth: '400px',
+    margin: 'auto',
+    border: '1px solid #ddd',
+    borderRadius: '8px',
+    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
+  },
+  form: {
+    width: '100%',
+  },
+  inputContainer: {
+    marginBottom: '15px',
+  },
+  input: {
+    width: '100%',
+    padding: '10px',
+    fontSize: '16px',
+    borderRadius: '4px',
+    border: '1px solid #ccc',
+  },
+  button: {
+    padding: '10px 15px',
+    fontSize: '16px',
+    color: '#fff',
+    backgroundColor: '#007bff',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
+  },
+  error: {
+    color: 'red',
+    marginBottom: '15px',
+  },
+  success: {
+    color: 'green',
+    marginBottom: '15px',
+  },
 };
 
 export default Register;
