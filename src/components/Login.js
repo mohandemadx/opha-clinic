@@ -1,7 +1,8 @@
 // Login.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../firebase/auth'; // Make sure the path is correct
+import { width } from '@fortawesome/free-solid-svg-icons/fa0';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -9,13 +10,16 @@ function Login() {
   const [error, setError] = useState(null);  // State for error handling
   const navigate = useNavigate();
 
+  const handleNavClick = () => {
+    console.log('Navigation label clicked');
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(null);  // Reset error state before attempting login
     try {
       const { user, userData, userID } = await loginUser(email, password); // Login and get user data
       console.log('Login successful');
-
       // Navigate based on userType
       if (user) {
         const userType = userData.userType; // Assuming userType is returned from your login function
@@ -35,52 +39,81 @@ function Login() {
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Login</h2>
-      {error && <p style={styles.error}>{error}</p>}  {/* Display error message if exists */}
-      <form onSubmit={handleLogin} style={styles.form}>
-        <div style={styles.inputContainer}>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={styles.input}
-          />
+    <div>
+      <header id="top-header" className="header-home">
+        <div className="grid">
+          <div className="content">
+            <nav className="navigation">
+              <label htmlFor="nav-button" onClick={handleNavClick}></label>
+              <ul className="nav-container">
+                    <li><Link to="/">Home</Link></li>
+              </ul>
+            </nav>
+          </div>
         </div>
-        <div style={styles.inputContainer}>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={styles.input}
-          />
-        </div>
-        <button type="submit" style={styles.button}>Login</button>
-      </form>
+      </header>
+
+      <div style={styles.container}>
+        <h2>Login</h2>
+        {error && <p style={styles.error}>{error}</p>}  {/* Display error message if exists */}
+        <form onSubmit={handleLogin} style={styles.form}>
+          <div style={styles.inputContainer}>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              style={styles.input}
+            />
+          </div>
+          <div style={styles.inputContainer}>
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              style={styles.input}
+            />
+          </div>
+          <button className="btn" type="submit" >Login</button>
+        </form>
+      </div>
     </div>
   );
 }
 
 const styles = {
+  html: {
+    height: '100%',           // Ensure html takes the full height
+  },
+  body: {
+    display: 'flex',
+    justifyContent: 'center',  // Centers horizontally
+    alignItems: 'center',      // Centers vertically
+    minHeight: '100vh',        // Full height of the viewport
+    margin: '0px',                 // Remove default margin
+    backgroundColor: '#f8f9fa', // Optional: background color for contrast
+  },
   container: {
+    width: '100%',
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     padding: '20px',
     maxWidth: '400px',
-    margin: 'auto',
-    border: '1px solid #ddd',
+    margin: 'auto',            // Reduce margin for better centering
+    border: '5px 20px 5px 20px solid #ddd',
     borderRadius: '8px',
     boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
   },
   form: {
     width: '100%',
+    height: '100%',
   },
   inputContainer: {
     marginBottom: '15px',
@@ -94,6 +127,7 @@ const styles = {
   },
   button: {
     padding: '10px 15px',
+    margin: '10px 10px',
     fontSize: '16px',
     color: '#fff',
     backgroundColor: '#007bff',
@@ -103,6 +137,10 @@ const styles = {
   },
   error: {
     color: 'red',
+    marginBottom: '15px',
+  },
+  success: {
+    color: 'green',
     marginBottom: '15px',
   },
 };

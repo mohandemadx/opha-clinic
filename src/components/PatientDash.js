@@ -5,6 +5,7 @@ import { getUserDocument } from '../firebase/firestoreFunctions'; // Adjust the 
 import { auth } from '../firebase/firebaseConfig'; // Import your Firebase auth configuration
 import { signOut } from 'firebase/auth'; // Import signOut from Firebase auth
 
+
 const PatientDashboard = () => {
   const location = useLocation();
   const navigate = useNavigate(); // Initialize useNavigate
@@ -12,6 +13,8 @@ const PatientDashboard = () => {
   const [patientData, setPatientData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isLoggedIn, setIsLoggedIn ] = useState(false);
+
 
   useEffect(() => {
     const fetchPatientData = async () => {
@@ -33,15 +36,22 @@ const PatientDashboard = () => {
   }, [userID]); // Dependency should be userID
 
   const handleLogout = async () => {
-    try {
-      await signOut(auth); // Sign out the user
-      console.log('Logged out successfully'); 
-      navigate('/login'); // Navigate to login page after logout
-    } catch (error) {
-      console.error('Error logging out:', error);
-      setError('Error logging out: ' + error.message); // Display logout error
-    }
-  };
+  try {
+    await signOut(auth); // Sign out the user
+    console.log('Logged out successfully'); 
+    setIsLoggedIn(false); // Correctly update the state
+    navigate('/'); // Navigate to login page after logout
+  } catch (error) {
+    console.error('Error logging out:', error);
+    setError('Error logging out: ' + error.message); // Display logout error
+  }
+};
+
+const handleGoHome = () => {
+  setIsLoggedIn(true); // Set isLoggedIn to true before navigating
+  navigate('/', { state: { isLoggedIn: true , userID}}); // Pass isLoggedIn to Home page
+};
+
 
   if (loading) {
     return <div>Loading...</div>; // Display a loading message while fetching data
@@ -67,7 +77,11 @@ const PatientDashboard = () => {
         <h4>Your Medical Records</h4>
         {/* Logic to display patient's medical records goes here */}
       </div>
-      <button style={styles.button} onClick={handleLogout}>
+      <button className="btn read-more" onClick={handleGoHome}>
+        Back to Home Page
+      </button>
+      <br/>
+      <button className="btn read-more" onClick={handleLogout}>
         Logout
       </button>
     </div>
